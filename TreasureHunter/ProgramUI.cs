@@ -10,6 +10,8 @@ namespace TreasureHunter
     {
         private int _lives = 6;
         private int _gems = 0;
+        public List<string> RoomCollection = new List<string> { "living room", "kitchen", "dining room", "bathroom", "bedroom", "bedroom two", "\n**RESTART**"};
+
 
         public void Run()
         {
@@ -20,33 +22,31 @@ namespace TreasureHunter
             ProgramUI menu = new ProgramUI();
             menu.StartMenu();
         }
-        public void SetUpGhost()
-        {
-            Random ghost = new Random();
-            bool HasGem = ghost.Next(0, 2) > 0;
-        }
 
         public void Menu()
         {
             Console.WriteLine($"Lives Left: {_lives}\n" +
                     $"Gems Collected: {_gems} \n" +
                     $"***********************************************");
-            Console.WriteLine($"Please choose a room\n" + //delete room after use
-            $"1. Living Room\n" +
-            $"2. Kitchen\n" +
-            $"3. Dining Room\n" +
-            $"4. Bedroom\n" +
-            $"5. Bathroom\n" +
-            $"6. Second Bedroom\n" +
-            $"7. Restart Game");
+            Console.WriteLine($"Please choose a room:");
+
+            foreach (string room in RoomCollection)
+            {
+                Console.WriteLine(room);
+            }
         }
 
         public void StartMenu()
         {
+            
             while (_lives >= 1)
             {
+
                 Menu();
                 string input = Console.ReadLine();
+
+                RoomCollection.Remove(input);
+
                 switch (input.ToLower()) //menu doesn't keep going if you put the invalid number
                 {
                     case "1":
@@ -76,13 +76,11 @@ namespace TreasureHunter
                         break;
                     case "6":
                     case "six":
-                    case "second bedroom":
+                    case "bedroom two":
                         EnterRoom();
                         break;
-                    case "7":
-                    case "seven":
                     case "restart":
-                        Console.WriteLine("Are you sure you want to restart? Press enter.");
+                        GameResult();
                         Console.ReadLine();
                         Console.Clear();
                         Run();
@@ -90,6 +88,7 @@ namespace TreasureHunter
                     default:
                         Console.WriteLine("please enter a valid number");
                         Console.ReadLine();
+                        Console.Clear();
                         break;
                 }
             }
@@ -97,24 +96,10 @@ namespace TreasureHunter
 
         public void GameResult()
         {
-            if (_lives == 0)
-            {
-                Console.WriteLine("You lose! Try again?"); //reset
-                Console.Clear();
-                Run();
-            }
-            else if (_gems == 3)
-            {
-                Console.WriteLine("You win! Play again?"); //reset
-                Console.Clear();
-                Run();
-            }
-            else
-            {
-                Console.WriteLine($"Lives Left: {_lives}\n" +
-                $"Gems Collected: {_gems} \n" +
-                $"***********************************************");
-            }
+            Console.WriteLine($"You win with {_gems} gems! Play again?");
+            Console.ReadLine();
+            Console.Clear();
+            Run();
         }
         public int RollDice()
         {
@@ -186,6 +171,14 @@ namespace TreasureHunter
             Console.WriteLine($"You now have {_gems} gems. Press enter to select the next room");
             Console.ReadLine();
             Console.Clear();
+
+            int roomCount = RoomCollection.Count();
+            if (roomCount == 0)
+            {
+                GameResult();
+            }
         }
+
+
     }
 }
