@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace TreasureHunter
 {
-    class Program
+    public class Room
     {
-        static void Main(string[] args)
+        public void EnterRoom()
         {
-            ProgramUI ui = new ProgramUI();
-            ui.Run();
+
         }
     }
 }

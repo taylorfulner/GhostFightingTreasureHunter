@@ -1,0 +1,7 @@
+C:\Users\Taylor\OneDrive\Documents\Coding&Development\ElevenFiftyProjects\GoldBadge\TreasureHunter\TreasureHunter\bin\Debug\TreasureHunter.exe.config
+C:\Users\Taylor\OneDrive\Documents\Coding&Development\ElevenFiftyProjects\GoldBadge\TreasureHunter\TreasureHunter\bin\Debug\TreasureHunter.exe
+C:\Users\Taylor\OneDrive\Documents\Coding&Development\ElevenFiftyProjects\GoldBadge\TreasureHunter\TreasureHunter\bin\Debug\TreasureHunter.pdb
+C:\Users\Taylor\OneDrive\Documents\Coding&Development\ElevenFiftyProjects\GoldBadge\TreasureHunter\TreasureHunter\obj\Debug\TreasureHunter.csprojAssemblyReference.cache
+C:\Users\Taylor\OneDrive\Documents\Coding&Development\ElevenFiftyProjects\GoldBadge\TreasureHunter\TreasureHunter\obj\Debug\TreasureHunter.csproj.CoreCompileInputs.cache
+C:\Users\Taylor\OneDrive\Documents\Coding&Development\ElevenFiftyProjects\GoldBadge\TreasureHunter\TreasureHunter\obj\Debug\TreasureHunter.exe
+C:\Users\Taylor\OneDrive\Documents\Coding&Development\ElevenFiftyProjects\GoldBadge\TreasureHunter\TreasureHunter\obj\Debug\TreasureHunter.pdb
