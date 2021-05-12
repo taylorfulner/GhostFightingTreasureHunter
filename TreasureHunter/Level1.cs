@@ -1,16 +1,15 @@
 ﻿using System;
+using TreasureHunter;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreasureHunter
 {
-    public class ProgramUI
+    public class Level1
     {
         private int _lives = 6;
         private int _gems = 0;
-        public List<string> RoomCollection = new List<string> { "living room", "kitchen", "dining room", "bathroom", "bedroom", "bedroom two", "\n**RESTART**"};
+        public List<string> RoomCollection = new List<string> { "living room", "kitchen", "dining room", "bathroom", "bedroom", "bedroom two"};
 
 
         public void Run()
@@ -19,14 +18,15 @@ namespace TreasureHunter
                 $"RULESSSS**********"); //add rules
             Console.ReadLine();
 
-            ProgramUI menu = new ProgramUI();
+            Level1 menu = new Level1();
             menu.StartMenu();
         }
 
         public void Menu()
         {
             Console.WriteLine($"Lives Left: {_lives}\n" +
-                    $"Gems Collected: {_gems} \n" +
+                    $"Gems Collected: {_gems} \n\n" +
+                    $"Type RESTART to start over.\n" +
                     $"***********************************************");
             Console.WriteLine($"Please choose a room:");
 
@@ -34,6 +34,7 @@ namespace TreasureHunter
             {
                 Console.WriteLine(room);
             }
+            Console.WriteLine();
         }
 
         public void StartMenu()

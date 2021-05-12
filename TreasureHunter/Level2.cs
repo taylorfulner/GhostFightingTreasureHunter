@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace TreasureHunter
 {
-    public class Ghost
+    class Level2
     {
 
-    }
-
-    public class Gem
-    {
-        List<string> gems = new List<string>();
     }
 }

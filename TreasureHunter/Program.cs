@@ -6,12 +6,22 @@ using System.Threading.Tasks;
 
 namespace TreasureHunter
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            ProgramUI ui = new ProgramUI();
-            ui.Run();
+            Program menu = new Program();
+            menu.Run();
+        }
+
+        public void Run()
+        {
+            Console.WriteLine($"Welcome to Ghost Fightin' Treasure Hunter\n" +
+                $"RULESSSS**********"); //add rules
+            Console.ReadLine();
+
+            Level1 menu = new Level1();
+            menu.StartMenu();
         }
     }
 }
