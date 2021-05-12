@@ -6,44 +6,48 @@ using System.Threading.Tasks;
 
 namespace TreasureHunter
 {
-    public enum RoomChoice { LivingRoom = 1, Kitchen, DiningRoom, Bedroom, Bathroom, SecondBedroom }
     public class ProgramUI
     {
-        private int _lives = 1;
+        private int _lives = 6;
         private int _gems = 0;
-        private bool HasGem = true;
-        private bool HasGhost = true;
 
         public void Run()
         {
             Console.WriteLine($"Welcome to Ghost Fightin' Treasure Hunter\n" +
-                $"RULESSSS**********");
+                $"RULESSSS**********"); //add rules
             Console.ReadLine();
 
             ProgramUI menu = new ProgramUI();
-            menu.Menu();
-
-            //run the gem/ghost initialize here
+            menu.StartMenu();
+        }
+        public void SetUpGhost()
+        {
+            Random ghost = new Random();
+            bool HasGem = ghost.Next(0, 2) > 0;
         }
 
         public void Menu()
         {
-
-            while (_lives >= 1 || _gems <= 2) 
-            {
-                Console.WriteLine($"Lives Left: {_lives}\n" +
-                    $"Gems Collected: {_gems} / 3\n" +
+            Console.WriteLine($"Lives Left: {_lives}\n" +
+                    $"Gems Collected: {_gems} \n" +
                     $"***********************************************");
-                Console.WriteLine($"Please choose a room\n" +
-                $"1. Living Room\n" +
-                $"2. Kitchen\n" +
-                $"3. Dining Room\n" +
-                $"4. Bedroom\n" +
-                $"5. Bathroom\n" +
-                $"6. Second Bedroom\n" +
-                $"7. Restart Game");
+            Console.WriteLine($"Please choose a room\n" + //delete room after use
+            $"1. Living Room\n" +
+            $"2. Kitchen\n" +
+            $"3. Dining Room\n" +
+            $"4. Bedroom\n" +
+            $"5. Bathroom\n" +
+            $"6. Second Bedroom\n" +
+            $"7. Restart Game");
+        }
+
+        public void StartMenu()
+        {
+            while (_lives >= 1)
+            {
+                Menu();
                 string input = Console.ReadLine();
-                switch (input.ToLower())
+                switch (input.ToLower()) //menu doesn't keep going if you put the invalid number
                 {
                     case "1":
                     case "one":
@@ -53,27 +57,27 @@ namespace TreasureHunter
                     case "2":
                     case "two":
                     case "kitchen":
-                        //method
+                        EnterRoom();
                         break;
                     case "3":
                     case "three":
                     case "dining room":
-                        //method
+                        EnterRoom();
                         break;
                     case "4":
                     case "four":
                     case "bedroom":
-                        //method
+                        EnterRoom();
                         break;
                     case "5":
                     case "five":
                     case "bathroom":
-                        //method
+                        EnterRoom();
                         break;
                     case "6":
                     case "six":
                     case "second bedroom":
-                        //method
+                        EnterRoom();
                         break;
                     case "7":
                     case "seven":
@@ -108,7 +112,7 @@ namespace TreasureHunter
             else
             {
                 Console.WriteLine($"Lives Left: {_lives}\n" +
-                $"Gems Collected: {_gems} / 3\n" +
+                $"Gems Collected: {_gems} \n" +
                 $"***********************************************");
             }
         }
@@ -124,6 +128,9 @@ namespace TreasureHunter
 
             Console.Clear();
 
+            Random gem = new Random();
+            bool HasGem = gem.Next(0, 2) > 0;
+
             if (HasGem == true)
             {
                 Console.WriteLine("You find a gem!");
@@ -133,7 +140,12 @@ namespace TreasureHunter
             {
                 Console.WriteLine("This room is empty. Try another room.");
                 Console.ReadLine();
+                Console.Clear();
+                StartMenu();
             }
+
+            Random ghost = new Random();
+            bool HasGhost = ghost.Next(0, 2) > 0;
 
             if (HasGhost == true)
             {
@@ -160,21 +172,20 @@ namespace TreasureHunter
                         Console.ReadLine();
                         ghostAttack = RollDice();
                         Console.WriteLine($"You rolled a {ghostAttack}");
-                        //int tryAgain = RollDice();
-                        //Console.WriteLine($"You rolled a {tryAgain}");
                     }
                 }
-                Console.WriteLine("You defeat the ghost. Press enter to pick up gem.");
-                _gems++;
+                Console.WriteLine("You defeat the ghost! Press enter to pick up the gem.");
                 Console.ReadLine();
-                Console.WriteLine($"You now have {_gems}. Press enter to select the next room");
-                Console.ReadLine();
-                Console.Clear();
             }
             else
             {
-
+                Console.WriteLine("Press enter to pick up the gem and run away before a ghost gets here!");
+                Console.ReadLine();
             }
+            _gems++;
+            Console.WriteLine($"You now have {_gems} gems. Press enter to select the next room");
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }
