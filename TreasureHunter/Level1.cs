@@ -9,17 +9,17 @@ namespace TreasureHunter
     {
         private int _lives = 6;
         private int _gems = 0;
-        public List<string> RoomCollection = new List<string> { "living room", "kitchen", "dining room", "bathroom", "bedroom", "bedroom two"};
+        public List<string> RoomCollection = new List<string> { "LIVING ROOM", "KITCHEN", "DINING ROOM", "BATHROOM", "BEDROOM", "BEDROOM TWO" };
 
 
         public void Run()
         {
             Console.WriteLine($"Welcome to Ghost Fightin' Treasure Hunter\n" +
-                $"RULESSSS**********"); //add rules
+                $"RULES: You are on a mission to collect the gems!  They are hidden in a house that is reported to be haunted - but you don't beieve in ghosts.  Go through each room and collect your treasure!"); 
             Console.ReadLine();
 
             Level1 menu = new Level1();
-            menu.StartMenu();
+            menu.StartLevel1();
         }
 
         public void Menu()
@@ -32,12 +32,12 @@ namespace TreasureHunter
 
             foreach (string room in RoomCollection)
             {
-                Console.WriteLine(room);
+                Console.WriteLine($"  {room}");
             }
             Console.WriteLine();
         }
 
-        public void StartMenu()
+        public void StartLevel1()
         {
             
             while (_lives >= 1)
@@ -46,38 +46,26 @@ namespace TreasureHunter
                 Menu();
                 string input = Console.ReadLine();
 
-                RoomCollection.Remove(input);
+                RoomCollection.Remove(input.ToUpper());
 
-                switch (input.ToLower()) //menu doesn't keep going if you put the invalid number
+                switch (input.ToUpper()) //menu doesn't keep going if you put the invalid number
                 {
-                    case "1":
-                    case "one":
-                    case "living room":
+                    case "LIVING ROOM":
                         EnterRoom();
                         break;
-                    case "2":
-                    case "two":
-                    case "kitchen":
+                    case "KITCHEN":
                         EnterRoom();
                         break;
-                    case "3":
-                    case "three":
-                    case "dining room":
+                    case "DINING ROOM":
                         EnterRoom();
                         break;
-                    case "4":
-                    case "four":
-                    case "bedroom":
+                    case "BEDROOM":
                         EnterRoom();
                         break;
-                    case "5":
-                    case "five":
-                    case "bathroom":
+                    case "BATHROOM":
                         EnterRoom();
                         break;
-                    case "6":
-                    case "six":
-                    case "bedroom two":
+                    case "BEDROOM TWO":
                         EnterRoom();
                         break;
                     case "restart":
@@ -97,7 +85,7 @@ namespace TreasureHunter
 
         public void GameResult()
         {
-            Console.WriteLine($"You win with {_gems} gems! Play again?");
+            Console.WriteLine($"You have {_gems} gems! You thought you won - however - the ghosts locked you in! You must fight the ghosts and find the key to keep your treasure.  Drink this to restore your health!  Press enter to continue your journey.");
             Console.ReadLine();
             Console.Clear();
             Run();
@@ -127,7 +115,7 @@ namespace TreasureHunter
                 Console.WriteLine("This room is empty. Try another room.");
                 Console.ReadLine();
                 Console.Clear();
-                StartMenu();
+                StartLevel1();
             }
 
             Random ghost = new Random();
@@ -177,9 +165,8 @@ namespace TreasureHunter
             if (roomCount == 0)
             {
                 GameResult();
+
             }
         }
-
-
     }
 }

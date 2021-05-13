@@ -21,7 +21,7 @@ namespace TreasureHunter
             Console.ReadLine();
 
             Level1 menu = new Level1();
-            menu.StartMenu();
+            menu.StartLevel1();
         }
     }
 }
