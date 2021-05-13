@@ -17,7 +17,7 @@ namespace TreasureHunter
         public void Run()
         {
             Console.WriteLine($"Welcome to Ghost Fightin' Treasure Hunter\n" +
-                $"RULES: You are on a mission to collect the gems!  They are hidden in a house that is reported to be haunted - but you don't beieve in ghosts.  Go through each room and collect your treasure!"); //add rules
+                $"RULES: You are on a mission to collect the gems!  They are hidden in a house that is reported to be haunted - but you don't beieve in ghosts.  Go through each room and search for treasure!"); //add rules
             Console.ReadLine();
 
             Level1 menu = new Level1();

@@ -11,24 +11,13 @@ namespace TreasureHunter
         public int _gems = 0;
         public List<string> RoomCollection = new List<string> { "living room", "kitchen", "dining room", "bathroom", "bedroom", "bedroom two" };
 
-
-        //public void Run()
-        //{
-        //    Console.WriteLine($"Welcome to Ghost Fightin' Treasure Hunter\n" +
-        //        $"RULES: You are on a mission to collect the gems!  They are hidden in a house that is reported to be haunted - but you don't beieve in ghosts.  Go through each room and collect your treasure!"); 
-        //    Console.ReadLine();
-
-        //    Level1 menu = new Level1();
-        //    menu.StartLevel1();
-        //}
-
         public void Menu()
         {
             Console.WriteLine($"Lives Left: {_lives}\n" +
                     $"Gems Collected: {_gems} \n\n" +
                     $"Type RESTART to start over.\n" +
                     $"***********************************************");
-            Console.WriteLine($"Please choose a room:");
+            Console.WriteLine($"Please Choose a Room:");
 
             foreach (string room in RoomCollection)
             {
@@ -40,7 +29,6 @@ namespace TreasureHunter
             if (roomCount == 0)
             {
                 GameResult();
-
             }
         }
 
@@ -83,7 +71,7 @@ namespace TreasureHunter
                         startOver.Run();
                         break;
                     default:
-                        Console.WriteLine("please enter a valid number");
+                        Console.WriteLine("Sorry, invalid selection. Press ENTER to select a room.");
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -94,7 +82,7 @@ namespace TreasureHunter
         public void GameResult()
         {
             Console.Clear();
-            Console.WriteLine($"You made it out of the house with {_gems} gems! Play again?");
+            Console.WriteLine($"You made it out of the house with {_gems} gems and {_lives} lives! Play again?");
             Console.ReadLine();
             Console.Clear();
             Program menu = new Program();
@@ -114,34 +102,18 @@ namespace TreasureHunter
 
             Console.Clear();
 
-            Random gem = new Random();
-            bool HasGem = gem.Next(0, 2) > 0;
-
-            if (HasGem == true)
-            {
-                Console.WriteLine("You find a gem!");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("This room is empty. Try another room.");
-                Console.ReadLine();
-                Console.Clear();
-                StartLevel1();
-            }
-
             Random ghost = new Random();
-            bool HasGhost = ghost.Next(0, 2) > 0;
+            int HasGhost = ghost.Next(1, 7);
 
-            if (HasGhost == true)
+            if (HasGhost >= 3)
             {
                 Console.WriteLine("You encounter a ghost!\n" +
-                    "Press enter to roll the dice and attack the ghost");
+                    "Press ENTER to roll the dice and attack the ghost");
                 Console.ReadLine();
                 int ghostAttack = RollDice();
                 Console.WriteLine($"You rolled a {ghostAttack}");
 
-                while (ghostAttack <= 4)
+                while (ghostAttack <= 3)
                 {
                     _lives--;
                     Console.WriteLine($"Sorry. You now have {_lives} lives.");
@@ -155,22 +127,39 @@ namespace TreasureHunter
                     }
                     else
                     {
-                        Console.WriteLine("Try again! Press enter to attack again.");
+                        Console.WriteLine("Try again! Press ENTER to attack again.");
                         Console.ReadLine();
                         ghostAttack = RollDice();
                         Console.WriteLine($"You rolled a {ghostAttack}");
                     }
                 }
-                Console.WriteLine("You defeat the ghost! Press enter to pick up the gem.");
+                Console.WriteLine("You defeat the ghost! Look for a gem in the room.");
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("Press enter to pick up the gem and run away before a ghost gets here!");
+                Console.WriteLine("There is no ghost in the room! Look for a gem in the room.");
                 Console.ReadLine();
             }
+
+            Random gem = new Random();
+            int HasGem = gem.Next(1, 7);
+
+            if (HasGem >= 4)
+            {
+                Console.WriteLine("You find a gem! Press ENTER to pick it up.");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("This room is empty. Try another room.");
+                Console.ReadLine();
+                Console.Clear();
+                StartLevel1();
+            }
+
             _gems++;
-            Console.WriteLine($"You now have {_gems} gems. Press enter to select the next room");
+            Console.WriteLine($"You now have {_gems} gems. Press ENTER to select the next room");
             Console.ReadLine();
             Console.Clear();
         }
