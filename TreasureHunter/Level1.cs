@@ -7,20 +7,20 @@ namespace TreasureHunter
 {
     public class Level1
     {
-        private int _lives = 6;
-        private int _gems = 0;
-        public List<string> RoomCollection = new List<string> { "LIVING ROOM", "KITCHEN", "DINING ROOM", "BATHROOM", "BEDROOM", "BEDROOM TWO" };
+        private int _lives = 4;
+        public int _gems = 0;
+        public List<string> RoomCollection = new List<string> { "living room", "kitchen", "dining room", "bathroom", "bedroom", "bedroom two" };
 
 
-        public void Run()
-        {
-            Console.WriteLine($"Welcome to Ghost Fightin' Treasure Hunter\n" +
-                $"RULES: You are on a mission to collect the gems!  They are hidden in a house that is reported to be haunted - but you don't beieve in ghosts.  Go through each room and collect your treasure!"); 
-            Console.ReadLine();
+        //public void Run()
+        //{
+        //    Console.WriteLine($"Welcome to Ghost Fightin' Treasure Hunter\n" +
+        //        $"RULES: You are on a mission to collect the gems!  They are hidden in a house that is reported to be haunted - but you don't beieve in ghosts.  Go through each room and collect your treasure!"); 
+        //    Console.ReadLine();
 
-            Level1 menu = new Level1();
-            menu.StartLevel1();
-        }
+        //    Level1 menu = new Level1();
+        //    menu.StartLevel1();
+        //}
 
         public void Menu()
         {
@@ -32,9 +32,16 @@ namespace TreasureHunter
 
             foreach (string room in RoomCollection)
             {
-                Console.WriteLine($"  {room}");
+                Console.WriteLine($"  {room.ToUpper()}");
             }
             Console.WriteLine();
+
+            int roomCount = RoomCollection.Count();
+            if (roomCount == 0)
+            {
+                GameResult();
+
+            }
         }
 
         public void StartLevel1()
@@ -46,33 +53,34 @@ namespace TreasureHunter
                 Menu();
                 string input = Console.ReadLine();
 
-                RoomCollection.Remove(input.ToUpper());
+                RoomCollection.Remove(input.ToLower());
 
-                switch (input.ToUpper()) //menu doesn't keep going if you put the invalid number
+                switch (input.ToLower())
                 {
-                    case "LIVING ROOM":
+                    case "living room":
                         EnterRoom();
                         break;
-                    case "KITCHEN":
+                    case "kitchen":
                         EnterRoom();
                         break;
-                    case "DINING ROOM":
+                    case "dining room":
                         EnterRoom();
                         break;
-                    case "BEDROOM":
+                    case "bedroom":
                         EnterRoom();
                         break;
-                    case "BATHROOM":
+                    case "bathroom":
                         EnterRoom();
                         break;
-                    case "BEDROOM TWO":
+                    case "bedroom two":
                         EnterRoom();
                         break;
                     case "restart":
                         GameResult();
                         Console.ReadLine();
                         Console.Clear();
-                        Run();
+                        Program startOver = new Program();
+                        startOver.Run();
                         break;
                     default:
                         Console.WriteLine("please enter a valid number");
@@ -85,11 +93,15 @@ namespace TreasureHunter
 
         public void GameResult()
         {
-            Console.WriteLine($"You have {_gems} gems! You thought you won - however - the ghosts locked you in! You must fight the ghosts and find the key to keep your treasure.  Drink this to restore your health!  Press enter to continue your journey.");
+            Console.Clear();
+            Console.WriteLine($"You made it out of the house with {_gems} gems! Play again?");
             Console.ReadLine();
             Console.Clear();
-            Run();
+            Program menu = new Program();
+            menu.Run();
+
         }
+
         public int RollDice()
         {
             Random diceRoll = new Random();
@@ -129,20 +141,21 @@ namespace TreasureHunter
                 int ghostAttack = RollDice();
                 Console.WriteLine($"You rolled a {ghostAttack}");
 
-                while (ghostAttack <= 3)
+                while (ghostAttack <= 4)
                 {
                     _lives--;
-                    Console.WriteLine($"sorry. You now have {_lives} lives.");
+                    Console.WriteLine($"Sorry. You now have {_lives} lives.");
                     if (_lives == 0)
                     {
-                        Console.WriteLine("you died. Try again?");
+                        Console.WriteLine("\nYOU DIED, TRY AGAIN?");
                         Console.ReadLine();
                         Console.Clear();
-                        Run();
+                        Program startOver = new Program();
+                        startOver.Run();
                     }
                     else
                     {
-                        Console.WriteLine("try again! Press enter to attack again.");
+                        Console.WriteLine("Try again! Press enter to attack again.");
                         Console.ReadLine();
                         ghostAttack = RollDice();
                         Console.WriteLine($"You rolled a {ghostAttack}");
@@ -160,13 +173,6 @@ namespace TreasureHunter
             Console.WriteLine($"You now have {_gems} gems. Press enter to select the next room");
             Console.ReadLine();
             Console.Clear();
-
-            int roomCount = RoomCollection.Count();
-            if (roomCount == 0)
-            {
-                GameResult();
-
-            }
         }
     }
 }

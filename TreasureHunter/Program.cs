@@ -8,7 +8,7 @@ namespace TreasureHunter
 {
     public class Program
     {
-        static void Main()
+        public static void Main()
         {
             Program menu = new Program();
             menu.Run();
@@ -17,11 +17,12 @@ namespace TreasureHunter
         public void Run()
         {
             Console.WriteLine($"Welcome to Ghost Fightin' Treasure Hunter\n" +
-                $"RULESSSS**********"); //add rules
+                $"RULES: You are on a mission to collect the gems!  They are hidden in a house that is reported to be haunted - but you don't beieve in ghosts.  Go through each room and collect your treasure!"); //add rules
             Console.ReadLine();
 
             Level1 menu = new Level1();
             menu.StartLevel1();
+
         }
     }
 }
